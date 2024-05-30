@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ anime.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .details-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .anime-details {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            margin-bottom: 20px;
+            background-color: var(--sidebar-background-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .anime-poster {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .anime-poster img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .anime-info {
+            flex: 2;
+        }
+
+        .anime-info p {
+            margin: 10px 0;
+        }
+
+        .watch-now {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: var(--button-background-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .watch-now:hover {
+            background-color: var(--button-hover-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="details-container">
+        <div class="anime-details">
+            <div class="anime-poster">
+                <img src="{{ anime.poster_image }}" alt="{{ anime.title }} poster">
+            </div>
+            <div class="anime-info">
+                <h1>{{ anime.title }}</h1>
+                <p><strong>Details:</strong> {{ anime.synopsis }}</p>
+                <p><strong>Start Date:</strong> {{ anime.start_date }}</p>
+                <p><strong>Status:</strong> {{ anime.status }}</p>
+                <p><strong>Average Rating:</strong> {{ anime.rating }}</p>
+                <p><strong>Total Episodes:</strong> {{ anime.total_episodes }}</p>
+                <a href="{{ url_for('anime', name=anime.title.lower().replace(' ', '-')) }}">
+                    <button class="watch-now"
+                        style="background-color: red; color: white; padding: 10px 20px; font-size: 1.2em;">Watch
+                        Now</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

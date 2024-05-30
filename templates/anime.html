@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ anime_name | title }} - Watch episodes with subtitles and dubbed versions.">
+    <meta name="keywords" content="{{ anime_name }}, anime, watch anime, sub, dub, episodes">
+    <meta property="og:title" content="{{ anime_name | title }} - FG_Anime">
+    <meta property="og:description" content="Watch {{ anime_name | title }} episodes online with subtitles and dubbed versions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.fg_anime.com/anime/{{ anime_name }}">
+    <meta property="og:image" content="https://www.fg_anime.com/static/images/{{ anime_name }}.jpg">
+    <title>{{ anime_name | title }} - FG_Anime</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .episode-options {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .episode-option {
+            margin: 0 5px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #555;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .episode-option:hover {
+            background-color: #777;
+        }
+
+        .episode-option.selected {
+            background-color: #333;
+        }
+
+        .episode-option.selected:hover {
+            background-color: #555;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .sidebar ul li {
+            margin: 0;
+            flex: 1 1 30px;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            font-weight: bold;
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            color: #333;
+            background-color: #e0e0e0;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #ccc;
+        }
+
+        .sidebar ul li a.selected {
+            background-color: #333;
+            color: white;
+        }
+
+        .episode-selection {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .episode-selection select {
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+
+        @media (max-width: 600px) {
+            .sidebar ul {
+                flex-direction: column;
+            }
+
+            .sidebar ul li {
+                flex: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="topbar">
+        <div class="site-name">FG Anime</div>
+        <div class="controls">
+            <div class="search-box">
+                <form action="/search" method="get">
+                    <input type="text" name="query" placeholder="Search anime..." aria-label="Search anime">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+            <button id="theme-toggle" aria-label="Toggle theme">Toggle Theme</button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="episode-selection">
+                <select id="episode-range" aria-label="Select episode range" onchange="setEpisodeStart(this.value)">
+                    <option value="1" {% if episode_start == 1 %}selected{% endif %}>1-100</option>
+                    <option value="101" {% if episode_start == 101 %}selected{% endif %}>101-200</option>
+                    <option value="201" {% if episode_start == 201 %}selected{% endif %}>201-300</option>
+                    <option value="301" {% if episode_start == 301 %}selected{% endif %}>301-400</option>
+                    <option value="401" {% if episode_start == 401 %}selected{% endif %}>401-500</option>
+                    <option value="501" {% if episode_start == 501 %}selected{% endif %}>501-600</option>
+                    <option value="601" {% if episode_start == 601 %}selected{% endif %}>601-700</option>
+                    <option value="701" {% if episode_start == 701 %}selected{% endif %}>701-800</option>
+                    <option value="801" {% if episode_start == 801 %}selected{% endif %}>801-900</option>
+                    <option value="901" {% if episode_start == 901 %}selected{% endif %}>901-1000</option>
+                    <option value="1001" {% if episode_start == 1001 %}selected{% endif %}>1001-1100</option>
+                    <option value="1101" {% if episode_start == 1101 %}selected{% endif %}>1101-1105</option>
+                </select>
+            </div>
+            <ul>
+                {% for i in range(episode_start, episode_start + 100) %}
+                <li><a href="/anime/{{ anime_name }}?episode={{ i }}&type={{ episode_type }}" class="{% if episode == i %}selected{% endif %}">{{ i }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="main">
+            <iframe id="anime-iframe" src="{{ embed_url }}" frameborder="0" allowfullscreen aria-label="Anime video player"></iframe>
+            <div class="episode-options">
+                <button id="sub-button" class="episode-option {% if episode_type == 'sub' %}selected{% endif %}" aria-label="Subtitles" onclick="setEpisodeType('sub')">Sub</button>
+                <button id="dub-button" class="episode-option {% if episode_type == 'dub' %}selected{% endif %}" aria-label="Dubbed" onclick="setEpisodeType('dub')">Dub</button>
+            </div>
+        </div>
+    </div>
+    <script src="/static/theme.js"></script>
+    <script>
+        function setEpisodeType(type) {
+            const currentEpisode = {{ episode }};
+            window.location.href = `/anime/{{ anime_name }}?episode=${currentEpisode}&type=${type}`;
+        }
+
+        function setEpisodeStart(start) {
+            window.location.href = `/anime/{{ anime_name }}?episode=${start}&type={{ episode_type }}`;
+        }
+
+        document.getElementById('anime-iframe').addEventListener('load', function() {
+            localStorage.setItem('{{ anime_name }}_last_episode', {{ episode }});
+        });
+
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        });
+    </script>
+    <footer class="footer">
+        <div class="container">
+            <p>Disclaimer: FG Anime does not host or store any files. All media files (embeds, videos, etc.) are hosted on third-party servers that are freely available to watch online for all internet users.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
