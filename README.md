@@ -6,7 +6,7 @@ i created this to illustrate show how this works and how they stream  it its fre
 
 - Install python latest and run this command
 ```pip install -r requirements.txt```
-- Now run pythonn main.py
+- Now run pythonn app.py
 - Goto localhost:5000 you will find the site up and running now its upto you what you watch
 - Thanks for chosing the  software...
 
