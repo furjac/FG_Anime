@@ -5,6 +5,8 @@ app = Flask(__name__)
 
 
 def format_anime_name(name):
+    if '  ' in name:
+        name = ' '.join(name.split())
     return name.lower().replace(' ', '-')
 
 
@@ -73,8 +75,6 @@ def anime(name):
     response = make_response(render_template('anime.html', embed_url=embed_url, anime_name=name, episode=episode, episode_start=episode_start, episode_type=episode_type))
     response.set_cookie(f'{name}_last_episode', str(episode), max_age=30*24*60*60)  # Save for 30 days
     return response
-
-# Route to serve the favicon
 
 
 @app.route('/favicon.ico')
