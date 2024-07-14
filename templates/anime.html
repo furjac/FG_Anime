@@ -155,7 +155,7 @@
     <script>
         function setEpisodeType(type) {
             const currentEpisode = {{ episode }};
-            localStorage.setItem('{{ anime_name }}_episode_type', type);
+            localStorage.setItem('{{ anime_name }}_episode_type', type); // Store episode type (sub/dub) in local storage
             window.location.href = `/anime/{{ anime_name }}?episode=${currentEpisode}&type=${type}`;
         }
     
@@ -180,13 +180,17 @@
                 document.body.classList.add('dark-theme');
             }
     
-            // Retrieve and apply the episode type (sub/dub) from local storage
+            // Retrieve and apply the episode type (sub/dub) from local storage if it differs from the current type
             const savedEpisodeType = localStorage.getItem('{{ anime_name }}_episode_type');
-            if (savedEpisodeType) {
-                setEpisodeType(savedEpisodeType);
+            const currentType = new URLSearchParams(window.location.search).get('type');
+    
+            if (savedEpisodeType && savedEpisodeType !== currentType) {
+                const currentEpisode = new URLSearchParams(window.location.search).get('episode') || {{ episode }};
+                window.location.href = `/anime/{{ anime_name }}?episode=${currentEpisode}&type=${savedEpisodeType}`;
             }
         });
     </script>
+    
     <footer class="footer">
         <div class="container">
             <p>Disclaimer: FG Anime does not host or store any files. All media files (embeds, videos, etc.) are hosted on third-party servers that are freely available to watch online for all internet users.</p>
