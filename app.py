@@ -7,6 +7,9 @@ app = Flask(__name__)
 def format_anime_name(name):
     if '  ' in name:
         name = ' '.join(name.split())
+    elif name.endswith(" "):
+        name = name.rstrip()
+    name = name.lstrip()
     return name.lower().replace(' ', '-')
 
 
