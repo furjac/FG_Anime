@@ -1,8 +1,4 @@
-html {
-    overflow:   scroll;
-  }
-  
-  ::-webkit-scrollbar {
+body::-webkit-scrollbar {
       width: 0px;
       background: transparent; /* make scrollbar transparent */
   }
