@@ -2,65 +2,11 @@
 <html lang="en">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4877363276486343"
-     crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ anime.title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <style>
-        .details-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .anime-details {
-            display: flex;
-            flex-direction: row;
-            width: 80%;
-            margin-bottom: 20px;
-            background-color: var(--sidebar-background-color);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .anime-poster {
-            flex: 1;
-            padding-right: 20px;
-        }
-
-        .anime-poster img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .anime-info {
-            flex: 2;
-        }
-
-        .anime-info p {
-            margin: 10px 0;
-        }
-
-        .watch-now {
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: var(--button-background-color);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .watch-now:hover {
-            background-color: var(--button-hover-color);
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/details.css">
 </head>
 
 <body>

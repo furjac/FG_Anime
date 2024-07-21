@@ -1,0 +1,87 @@
+body {
+    overflow-x: hidden;
+}
+.episode-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.episode-option {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.episode-option:hover {
+    background-color: #777;
+}
+
+.episode-option.selected {
+    background-color: #333;
+}
+
+.episode-option.selected:hover {
+    background-color: #555;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sidebar ul li {
+    margin: 0;
+    flex: 1 1 30px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    color: #333;
+    background-color: #e0e0e0;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ccc;
+}
+
+.sidebar ul li a.selected {
+    background-color: #333;
+    color: white;
+}
+
+.episode-selection {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.episode-selection select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+@media (max-width: 600px) {
+    .sidebar ul {
+        flex-direction: column;
+    }
+
+    .sidebar ul li {
+        flex: none;
+    }
+}
