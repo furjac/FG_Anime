@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ anime.title }}</title>
+    <title>{{ anime.title_romaji }}</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="/static/css/details.css">
 </head>
@@ -13,20 +13,18 @@
     <div class="details-container">
         <div class="anime-details">
             <div class="anime-poster">
-                <img src="{{ anime.poster_image }}" alt="{{ anime.title }} poster">
+                <img src="{{ anime.cover_image }}" alt="{{ anime.title_romaji }} poster">
             </div>
             <div class="anime-info">
-                <h1>{{ anime.title }}</h1>
-                <p><strong>Details:</strong> {{ anime.synopsis }}</p>
+                <h1>{{ anime.title_romaji }}</h1>
+                <h2>{{ anime.title_english }}</h2>
+                <h3>{{ anime.title_native }}</h3>
+                <p><strong>Details:</strong> {{ anime.description | safe }}</p>
                 <p><strong>Start Date:</strong> {{ anime.start_date }}</p>
                 <p><strong>Status:</strong> {{ anime.status }}</p>
-                <p><strong>Average Rating:</strong> {{ anime.rating }}</p>
-                <p><strong>Total Episodes:</strong> {{ anime.total_episodes }}</p>
-                <!-- Add additional AniAPI fields if available -->
-                <p><strong>Genres:</strong> {{ anime.genres | default('No genres available.') }}</p>
-                <p><strong>Producers:</strong> {{ anime.producers | default('No producers available.') }}</p>
-                <p><strong>Studios:</strong> {{ anime.studios | default('No studios available.') }}</p>
-                <a href="{{ url_for('anime', name=anime.title.lower().replace(' ', '-')) }}">
+                <p><strong>Average Rating:</strong> {{ anime.average_score }}</p>
+                <p><strong>Total Episodes:</strong> {{ anime.episodes }}</p>
+                <a href="{{ url_for('anime', name=anime.title_romaji.lower().replace(' ', '-')) }}">
                     <button class="watch-now"
                         style="background-color: red; color: white; padding: 10px 20px; font-size: 1.2em;">Watch
                         Now</button>

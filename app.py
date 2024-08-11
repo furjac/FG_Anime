@@ -69,6 +69,10 @@ def fetch_anime_details_from_anilist(name):
     # Define the endpoint and send the request
     url = 'https://graphql.anilist.co'
     response = requests.post(url, json={'query': query, 'variables': variables})
+    
+    if response.status_code != 200:
+        return None
+
     data = response.json()
 
     # Extract the data
