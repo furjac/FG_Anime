@@ -22,6 +22,10 @@
                 <p><strong>Status:</strong> {{ anime.status }}</p>
                 <p><strong>Average Rating:</strong> {{ anime.rating }}</p>
                 <p><strong>Total Episodes:</strong> {{ anime.total_episodes }}</p>
+                <!-- Add additional AniAPI fields if available -->
+                <p><strong>Genres:</strong> {{ anime.genres | default('No genres available.') }}</p>
+                <p><strong>Producers:</strong> {{ anime.producers | default('No producers available.') }}</p>
+                <p><strong>Studios:</strong> {{ anime.studios | default('No studios available.') }}</p>
                 <a href="{{ url_for('anime', name=anime.title.lower().replace(' ', '-')) }}">
                     <button class="watch-now"
                         style="background-color: red; color: white; padding: 10px 20px; font-size: 1.2em;">Watch

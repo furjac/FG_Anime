@@ -36,25 +36,26 @@ def search():
 
 @app.route('/details/<name>')
 def details(name):
-    # Fetch anime details from Kitsu API
-    search_url = f"https://kitsu.io/api/edge/anime?filter[text]={name}"
+    # Fetch anime details from AniAPI
+    search_url = f"https://api.aniapi.com/v1/anime?search={name}"
     search_response = requests.get(search_url)
     search_data = search_response.json()
 
-    if search_data['data']:
-        anime_data = search_data['data'][0]['attributes']
-        total_episodes = anime_data.get('episodeCount')
-        synopsis = anime_data.get('synopsis', 'No synopsis available.')
-        start_date = anime_data.get('startDate', 'No start date available.')
+    if search_data['data']['documents']:
+        anime_data = search_data['data']['documents'][0]
+        
+        # Extract details from AniAPI response
+        title = anime_data.get('title', 'No title available.')
+        total_episodes = anime_data.get('episodes', 'No episode count available.')
+        synopsis = anime_data.get('description', 'No synopsis available.')
+        start_date = anime_data.get('start_date', 'No start date available.')
         status = anime_data.get('status', 'No status available.')
-        rating = anime_data.get('averageRating', 'No rating available.')
-        poster_image = anime_data.get('posterImage', {}).get('original', '')
+        rating = anime_data.get('rating', 'No rating available.')
+        poster_image = anime_data.get('cover_image', '')
 
-        if total_episodes is None:
-            total_episodes = "Total episodes not specified."
-
+        # Build the anime details dictionary
         anime_details = {
-            'title': name.replace('-', ' ').title(),
+            'title': title,
             'total_episodes': total_episodes,
             'synopsis': synopsis,
             'start_date': start_date,
