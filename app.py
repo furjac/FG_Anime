@@ -34,36 +34,66 @@ def search():
     return redirect(url_for('index'))
 
 
+def fetch_anime_details_from_anilist(name):
+    # Define the GraphQL query
+    query = '''
+    query ($search: String) {
+      Media(search: $search, type: ANIME) {
+        id
+        title {
+          romaji
+          english
+          native
+        }
+        description
+        episodes
+        startDate {
+          year
+          month
+          day
+        }
+        status
+        averageScore
+        coverImage {
+          large
+        }
+      }
+    }
+    '''
+
+    # Define the variables for the query
+    variables = {
+        'search': name
+    }
+
+    # Define the endpoint and send the request
+    url = 'https://graphql.anilist.co'
+    response = requests.post(url, json={'query': query, 'variables': variables})
+    data = response.json()
+
+    # Extract the data
+    media = data.get('data', {}).get('Media', {})
+    if media:
+        return {
+            'title_romaji': media.get('title', {}).get('romaji', 'No title available.'),
+            'title_english': media.get('title', {}).get('english', 'No title available.'),
+            'title_native': media.get('title', {}).get('native', 'No title available.'),
+            'description': media.get('description', 'No description available.'),
+            'episodes': media.get('episodes', 'Not specified.'),
+            'start_date': f"{media.get('startDate', {}).get('year', 'Unknown Year')}-{media.get('startDate', {}).get('month', '00')}-{media.get('startDate', {}).get('day', '00')}",
+            'status': media.get('status', 'No status available.'),
+            'average_score': media.get('averageScore', 'No score available.'),
+            'cover_image': media.get('coverImage', {}).get('large', 'No cover image available.')
+        }
+    else:
+        return None
+
+
 @app.route('/details/<name>')
 def details(name):
-    # Fetch anime details from AniAPI
-    search_url = f"https://api.aniapi.com/v1/anime?search={name}"
-    search_response = requests.get(search_url)
-    search_data = search_response.json()
-
-    if search_data['data']['documents']:
-        anime_data = search_data['data']['documents'][0]
-        
-        # Extract details from AniAPI response
-        title = anime_data.get('title', 'No title available.')
-        total_episodes = anime_data.get('episodes', 'No episode count available.')
-        synopsis = anime_data.get('description', 'No synopsis available.')
-        start_date = anime_data.get('start_date', 'No start date available.')
-        status = anime_data.get('status', 'No status available.')
-        rating = anime_data.get('rating', 'No rating available.')
-        poster_image = anime_data.get('cover_image', '')
-
-        # Build the anime details dictionary
-        anime_details = {
-            'title': title,
-            'total_episodes': total_episodes,
-            'synopsis': synopsis,
-            'start_date': start_date,
-            'status': status,
-            'rating': rating,
-            'poster_image': poster_image
-        }
-
+    anime_details = fetch_anime_details_from_anilist(name)
+    
+    if anime_details:
         return render_template('details.html', anime=anime_details)
     else:
         return "Anime not found."
