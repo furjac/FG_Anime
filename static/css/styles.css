@@ -153,14 +153,6 @@ option {
     height: 100%;
 }
 
-.footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    bottom: 0;
-}
-
 iframe {
     width: 100%;
     height: calc(95% - 40px);
@@ -256,4 +248,31 @@ iframe {
 [data-theme='dark'] #theme-toggle:hover,
 [data-theme='dark'] .watch-now {
     background-color: var(--button-hover-color);
+}
+
+.footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #1c1c1c;
+    color: #777;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer a {
+    color: #ff4081;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.footer a:hover {
+    text-decoration: underline;
 }

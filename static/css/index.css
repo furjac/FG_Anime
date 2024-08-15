@@ -43,3 +43,69 @@ body {
 .search-box button:hover {
     background-color: #777;
 }
+
+header {
+    background-color: #2c2c2c;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.5em;
+    color: #ff4081;
+    font-weight: bold;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #ff4081;
+}
+
+.content {
+    padding: 50px 20px;
+    background-color: #2c2c2c;
+}
+
+.content section {
+    margin-bottom: 50px;
+}
+
+.content h2 {
+    color: #ff4081;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1.2em;
+    line-height: 1.8;
+}
+
+.content a {
+    color: #ff4081;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.content a:hover {
+    text-decoration: underline;
+}

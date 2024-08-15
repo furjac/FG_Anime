@@ -34,6 +34,8 @@ def search():
     return redirect(url_for('index'))
 
 
+import requests
+
 def fetch_anime_details_from_anilist(name):
     # Define the GraphQL query
     query = '''
@@ -93,6 +95,7 @@ def fetch_anime_details_from_anilist(name):
         return None
 
 
+
 @app.route('/details/<name>')
 def details(name):
     anime_details = fetch_anime_details_from_anilist(name)
@@ -118,6 +121,22 @@ def anime(name):
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(app.static_folder, 'favicon.ico')
+
+@app.route('/contact-us')
+def contact_us():
+    return render_template('contact_us.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/privacy-policy')
+def privacy_policy():
+    return render_template('privacy_policy.html')
+
+@app.route('/terms-of-service')
+def terms_of_service():
+    return render_template('terms_of_service.html')
 
 
 if __name__ == '__main__':

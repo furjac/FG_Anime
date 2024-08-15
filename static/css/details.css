@@ -1,10 +1,20 @@
+/* Ensure that the container fills the viewport height */
+html, body {
+    height: 100%;
+    margin: 0;
+    /* box-sizing: border-box; */
+}
+
+/* Main content container */
 .details-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    min-height: 100vh; /* Fill the viewport height */
 }
 
+/* Anime details section */
 .anime-details {
     display: flex;
     flex-direction: row;
@@ -16,6 +26,7 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Anime poster image */
 .anime-poster {
     flex: 1;
     padding-right: 20px;
@@ -27,14 +38,17 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Anime information section */
 .anime-info {
     flex: 2;
 }
 
+/* Paragraph styling inside anime information */
 .anime-info p {
     margin: 10px 0;
 }
 
+/* Watch Now button styling */
 .watch-now {
     padding: 10px 20px;
     font-size: 1.2em;
@@ -48,4 +62,9 @@
 
 .watch-now:hover {
     background-color: var(--button-hover-color);
+}
+
+/* Remove bottom margin from the last child in the details-container */
+.details-container > :last-child {
+    margin-bottom: 0;
 }

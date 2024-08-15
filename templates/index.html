@@ -4,12 +4,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FG_anime</title>
+    <title>FG_anime - Your Gateway to the Anime World</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="/static/css/index.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #1c1c1c;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <div class="logo">FG Anime</div>
+        <nav>
+            <ul>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
+                <li><a href="/terms-of-service">Terms & Conditions</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <div class="search-container">
         <div class="search-box">
             <form action="/search" method="get">
@@ -18,6 +37,11 @@
             </form>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 FG_anime. All rights reserved. | <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms-of-service">Terms of Service</a> | This project is open-source. Check out our <a href="https://github.com/furjac/FG_Anime" target="_blank" rel="noopener noreferrer">GitHub repository</a>.</p>
+    </footer>
+
     <script src="/static/js/theme.js"></script>
 </body>
 
