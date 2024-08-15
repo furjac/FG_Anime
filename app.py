@@ -124,7 +124,7 @@ def favicon():
 
 @app.route('/contact-us')
 def contact_us():
-    return render_template('contact_us.html')
+    return render_template('contact.html')
 
 @app.route('/about')
 def about():
