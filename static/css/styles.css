@@ -155,7 +155,7 @@ option {
 
 iframe {
     width: 100%;
-    height: calc(95% - 40px);
+    height: calc(90% - 40px);
     /* Adjust to accommodate padding */
     border: none;
 }
