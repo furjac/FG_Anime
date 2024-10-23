@@ -126,6 +126,10 @@ def favicon():
 def contact_us():
     return render_template('contact.html')
 
+@app.route('/version')
+def contact_us():
+    return render_template('version.html')
+
 @app.route('/about')
 def about():
     return render_template('about.html')
