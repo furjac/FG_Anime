@@ -127,7 +127,7 @@ def contact_us():
     return render_template('contact.html')
 
 @app.route('/version')
-def contact_us():
+def version():
     return render_template('version.html')
 
 @app.route('/about')
